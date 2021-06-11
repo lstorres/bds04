@@ -1,6 +1,8 @@
 package com.devsuperior.bds04.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -72,5 +74,12 @@ public class CityService {
 	
 	private void copyDtoToEntity(CityDTO dto, City entity) {
 			entity.setName(dto.getName());	
+	}
+
+	public List<CityDTO> findAllSortedByName() {
+		List<CityDTO> cityDtoList = repository.findAllByOrderByNameAsc().stream()
+				.map(city -> new CityDTO(city))
+				.collect(Collectors.toList());
+		return cityDtoList;
 	}
 }

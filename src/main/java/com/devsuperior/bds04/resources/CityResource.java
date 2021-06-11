@@ -1,12 +1,11 @@
 package com.devsuperior.bds04.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +28,8 @@ public class CityResource {
 	private CityService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<CityDTO>> findAll(Pageable pageable) {
-		Page<CityDTO> list = service.findAllPaged(pageable);		
+	public ResponseEntity<List<CityDTO>> findAllSortedByName(){
+		List<CityDTO> list = service.findAllSortedByName();		
 		return ResponseEntity.ok().body(list);
 	}
 
